@@ -15,8 +15,22 @@ const Gameboard = () => {
     }
   }
 
+  const receiveAttack = (coordinates, gridPlacements, shipIndexes) => {
+    if (coordinates in gridPlacements) {
+      const ship = gridPlacements[coordinates]
+      const shipIndex = shipIndexes[ship].findIndex((position) => position === coordinates);
+      return ship.hit(shipIndex);
+    } 
+  }
+
+  // const determineShipCoordIndex = (ship, coordinates) => {
+  //   console.log(gridPlacements)
+  //   return shipIndexes[ship].findIndex(coordinates);
+  // }
+
   return {
     placeShip,
+    receiveAttack,
     gridPlacements,
     shipIndexes
   }
