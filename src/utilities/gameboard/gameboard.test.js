@@ -3,22 +3,58 @@ import Ship from '../ship/ship';
 
 test('places ships at specific coordinates',() => {
   const ship = {};
+  const gameboard = Gameboard();
   const coordinates = ['A1','A2','A3'];
-  const gridPlacements = {};
-  const shipIndexes = {};
-  Gameboard().placeShip(ship, coordinates, gridPlacements, shipIndexes);
-  expect(gridPlacements).toEqual({'A1': ship, 'A2': ship, 'A3': ship})
-  expect(shipIndexes).toEqual({[ship]: ['A1','A2','A3'] })
+  gameboard.placeShip(ship, coordinates);
+  expect(gameboard.gridPlacements).toEqual({'A1': ship, 'A2': ship, 'A3': ship})
+  expect(gameboard.shipIndexes).toEqual({[ship]: ['A1','A2','A3'] })
 })
 
-describe('processes hits from enemy', () => {
+describe('processes shots from enemy', () => {
   jest.mock('../ship/ship');
-  const ship = Ship(5);
-  const coordinates = 'A1';
-  const gridPlacements = {'A1': ship, 'A2': ship, 'A3': ship};
-  const shipIndexes = {[ship]: ['A1','A2','A3'] };
+  const ship = Ship(3);
+  const gameboard = Gameboard();
+  const coordinates = ['A1','A2','A3'];
+  gameboard.placeShip(ship, coordinates);
 
-  test('sends hit function to correct ship', () => {
-    expect(Gameboard().receiveAttack(coordinates,gridPlacements,shipIndexes)).toEqual(ship.hit(0))
+  test('sends hit function to correct ship with correct index', () => {
+    const coordinates = 'A1';
+    expect(gameboard.receiveAttack(coordinates)).toEqual(ship.hit(0))
+  });
+
+  test('records coordinates of shot that lands', () => {
+    const coordinates = 'A1';
+    gameboard.receiveAttack(coordinates);
+    expect(gameboard.shotsLanded[coordinates]).toBeTruthy();
+    expect(gameboard.shotsMissed[coordinates]).toBeFalsy();
+  });
+
+  test('records coordinates of shot that misses', () => {
+    const coordinates = 'A4';
+    gameboard.receiveAttack(coordinates);
+    expect(gameboard.shotsLanded[coordinates]).toBeFalsy();
+    expect(gameboard.shotsMissed[coordinates]).toBeTruthy();
   });
 });
+
+describe('determines if all ships are sunk', () => {
+  jest.mock('../ship/ship');
+  const ship = Ship(3);
+  const gameboard = Gameboard();
+  const coordinates = ['A1','A2','A3'];
+  gameboard.placeShip(ship, coordinates);
+
+  test('says all ships are sunk', () => {
+    // ship.hitArray = jest.fn().mockReturnValueOnce(10);
+    // console.log(ship.hitArray())
+
+    gameboard.receiveAttack('A1');
+    gameboard.receiveAttack('A2');
+    gameboard.receiveAttack('A3');
+    expect(gameboard.allShipsSunk()).toBe(true);
+  })
+  
+  test('says not all ships are sunk', () => {
+    expect(gameboard.allShipsSunk()).toBe(false);
+  })
+})
