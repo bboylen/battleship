@@ -9,10 +9,10 @@ const Gameboard = () => {
   const placeShip = (ship, coordinates) => {
     for (let coord of coordinates) {
       gridPlacements[coord] = ship;
-      if (!shipIndexes[ship]) {
-        shipIndexes[ship] = [coord];
+      if (!shipIndexes.has(ship)) {
+        shipIndexes.set(ship, [coord]);
       } else {
-        shipIndexes[ship].push(coord);
+        shipIndexes.set(ship, [...shipIndexes.get(ship), coord]);
       }
     }
   }
@@ -20,19 +20,23 @@ const Gameboard = () => {
   const receiveAttack = (coordinates) => {
     if (coordinates in gridPlacements) {
       const ship = gridPlacements[coordinates]
-      const shipIndex = shipIndexes[ship].findIndex((position) => position === coordinates);
+      const shipIndex = shipIndexes.get(ship).findIndex((position) => position === coordinates);
       shotsLanded[coordinates] = true;
       return ship.hit(shipIndex);
     } else shotsMissed[coordinates] = true;
   }
 
   const allShipsSunk = () => {
-    for (let ship in shipIndexes) {
-      console.log([ship]);
-      console.log(shipIndexes[ship]);
-      if (!ship.isSunk()) return false;
+    let oneNotSunk = false;
+    shipIndexes.forEach((val,ship) => {
+      if (ship.isSunk() === false) oneNotSunk = true;
+    })
+
+    if (oneNotSunk) {
+      return false;
+    } else {
+      return true;
     }
-    return true;
   }
   return {
     placeShip,
