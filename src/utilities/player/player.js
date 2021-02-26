@@ -1,5 +1,3 @@
-import Gameboard from '../gameboard/gameboard'
-
 const Player = () => {
   let gameboard = {};
 
