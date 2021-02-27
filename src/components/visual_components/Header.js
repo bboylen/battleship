@@ -1,7 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import '../../styles/Header.css';
 
 const Header = () => {
-  return <div />;
+  return (
+    <div id="header">
+      <h1>battleship</h1>
+    </div>
+  );
 };
 
 export default Header;
