@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import '../../styles/GridContainer.css';
 import Grid from './Grid';
 
-const GridContainer = () => {
+const GridContainer = (props) => {
   return (
     <div id="grid-container">
-      <Grid />
-      <Grid />
+      <Grid grid={props.playerGrid}/>
+      <Grid grid={props.computerGrid}/>
     </div>
   );
 };
