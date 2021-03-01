@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-//import '../../styles/Cell.css';
+import '../../styles/Cell.css';
 
 const Cell = ({ props }) => {
   const { id, containsShip } = props;
