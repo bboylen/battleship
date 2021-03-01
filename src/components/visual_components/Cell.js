@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import '../../styles/Cell.css';
 
-const Cell = ({ props }) => {
-  const { id, containsShip } = props;
+const Cell = ({ props, handleHit }) => {
+  const { id, containsShip, hit } = props;
   return (
     <div
       className="cell"
       id={id}
       className={containsShip ? "ship" : null}
+      className={hit ? "hit" : null}
+      onClick={(e) => handleHit(e)}
     ></div>
   );
 };

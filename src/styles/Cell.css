@@ -10,6 +10,11 @@
   background-color:red;
 }
 
+#grid div.hit {
+  background-color: chartreuse;
+}
+/* responsive sizing */
+
 @media only screen and (max-width: 1800px) {
   #grid div {
     width: 50px;

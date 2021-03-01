@@ -34,13 +34,32 @@ const GameLogic = () => {
     populateGameboard(Gameboard())
   );
   // what else needs to be tracked? Whose turn it is, grid visual
+// track ship state?
 
   const [playerGrid, setPlayerGrid] = useState(
     gridHelper.buildGrid(playerGameboard.gridPlacements)
   );
   const [computerGrid, setComputerGrid] = useState(gridHelper.buildGrid());
 
-  return <Display playerGrid={playerGrid} computerGrid={computerGrid}/>;
+  const handleHit = (event) => {
+    const coordinates = event.target.id;
+    updatePlayerGrid(coordinates);
+    // knows which gameboard based on turn
+    // const grid = (playerTurn) ? playerGrid : computerGrid
+    // gameboard.receiveAttack(coordinates)
+    // might need to refactor code to not mutate gameboard state here
+    // div must lose hit event, add hit class
+  }
+  // temporary
+  const updatePlayerGrid = (coordinates) => {
+    // this seems insanely inefficient
+    const newGrid = [...playerGrid];
+    newGrid[coordinates].hit = true;
+    setPlayerGrid(newGrid)
+  }
+
+  // click on cell -> receiveAttack(5) -> shotsLanded,ship.hit, shotsMissed -> useEffect / some hook sees change in state and updates grid
+  return <Display playerGrid={playerGrid} computerGrid={computerGrid} handleHit={handleHit} />;
 };
 
 export default GameLogic;

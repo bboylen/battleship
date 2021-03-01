@@ -9,7 +9,7 @@ const Display = (props) => {
     <div id="display-container">
       <Header />
       <Controls />
-      <GridContainer playerGrid={props.playerGrid} computerGrid={props.computerGrid}/>
+      <GridContainer handleHit={props.handleHit} playerGrid={props.playerGrid} computerGrid={props.computerGrid}/>
     </div>
   );
 };
