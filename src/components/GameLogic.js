@@ -33,8 +33,9 @@ const GameLogic = () => {
   const [computerGameboard, setComputerGameboard] = useState(
     populateGameboard(Gameboard())
   );
+  const [playerTurn, setPlayerTurn] = useState(true);
   // what else needs to be tracked? Whose turn it is, grid visual
-// track ship state?
+  // track ship state?
 
   const [playerGrid, setPlayerGrid] = useState(
     gridHelper.buildGrid(playerGameboard.gridPlacements)
@@ -43,23 +44,44 @@ const GameLogic = () => {
 
   const handleHit = (event) => {
     const coordinates = event.target.id;
-    updatePlayerGrid(coordinates);
-    // knows which gameboard based on turn
-    // const grid = (playerTurn) ? playerGrid : computerGrid
-    // gameboard.receiveAttack(coordinates)
+    const gameboard = playerTurn ? playerGameboard : computerGameboard;
+    
+   // gameboard.receiveAttack(coordinates);
     // might need to refactor code to not mutate gameboard state here
+    if (gameboard.gridPlacements[coordinates]) {
+      playerTurn
+        ? updatePlayerGrid(coordinates, "hit")
+        : updateComputerGrid(coordinates, "hit");
+    } else {
+      playerTurn
+        ? updatePlayerGrid(coordinates, "miss")
+        : updateComputerGrid(coordinates, "miss");
+    }
     // div must lose hit event, add hit class
-  }
+    // switch turns
+    //holy shit make this function do less
+  };
   // temporary
-  const updatePlayerGrid = (coordinates) => {
-    // this seems insanely inefficient
+  const updatePlayerGrid = (coordinates, hitStatus) => {
     const newGrid = [...playerGrid];
-    newGrid[coordinates].hit = true;
-    setPlayerGrid(newGrid)
-  }
+    newGrid[coordinates][hitStatus] = true;
+    setPlayerGrid(newGrid);
+  };
+
+  const updateComputerGrid = (coordinates, hitStatus) => {
+    const newGrid = [...playerGrid];
+    newGrid[coordinates][hitStatus] = true;
+    setComputerGrid(newGrid);
+  };
 
   // click on cell -> receiveAttack(5) -> shotsLanded,ship.hit, shotsMissed -> useEffect / some hook sees change in state and updates grid
-  return <Display playerGrid={playerGrid} computerGrid={computerGrid} handleHit={handleHit} />;
+  return (
+    <Display
+      playerGrid={playerGrid}
+      computerGrid={computerGrid}
+      handleHit={handleHit}
+    />
+  );
 };
 
 export default GameLogic;

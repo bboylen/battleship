@@ -2,16 +2,24 @@
   width: 60px;
   height: 60px;
   border: 1px solid black;
-  background-color: brown;
+  background-color: grey;
 }
 
 #grid div:hover {
   cursor: pointer;
-  background-color:red;
+  background-color:lightgray;
+}
+
+#grid div.ship {
+  background-color: chartreuse;
 }
 
 #grid div.hit {
-  background-color: chartreuse;
+  background-color: red;
+}
+
+#grid div.miss {
+  background-color: darkblue;
 }
 /* responsive sizing */
 
