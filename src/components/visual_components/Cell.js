@@ -3,7 +3,6 @@ import "../../styles/Cell.css";
 
 const Cell = ({ props, handleHit, playerTurn }) => {
   const { id, containsShip, hit, miss } = props;
-  console.log(playerTurn)
   return (
     <div
       className="cell"

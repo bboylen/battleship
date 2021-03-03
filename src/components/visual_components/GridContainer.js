@@ -5,18 +5,17 @@ import Grid from "./Grid";
 const GridContainer = (props) => {
   const { playerTurn } = props;
   const computerTurn = !playerTurn;
-  console.log(playerTurn, computerTurn);
   return (
     <div id="grid-container">
       <Grid
         grid={props.playerGrid}
         handleHit={props.handleHit}
-        playerTurn={playerTurn}
+        playerTurn={computerTurn}
       />
       <Grid
         grid={props.computerGrid}
         handleHit={props.handleHit}
-        playerTurn={computerTurn}
+        playerTurn={playerTurn}
       />
     </div>
   );

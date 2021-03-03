@@ -52,15 +52,13 @@ const GameLogic = () => {
    // gameboard.receiveAttack(coordinates);
     // might need to refactor code to not mutate gameboard state here
     if (gameboard.gridPlacements[coordinates]) {
-      console.log('a')
       playerTurn
-        ? updatePlayerGrid(coordinates, "hit")
-        : updateComputerGrid(coordinates, "hit");
+        ? updateComputerGrid(coordinates, "hit")
+        : updatePlayerGrid(coordinates, "hit");
     } else {
-      console.log('b')
       playerTurn
-        ? updatePlayerGrid(coordinates, "miss")
-        : updateComputerGrid(coordinates, "miss");
+        ? updateComputerGrid(coordinates, "miss")
+        : updatePlayerGrid(coordinates, "miss");
     }
 
     switchTurns();
