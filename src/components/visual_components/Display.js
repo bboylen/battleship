@@ -1,15 +1,20 @@
-import { useState, useEffect } from 'react';
-import Header from './Header';
-import GridContainer from './GridContainer';
-import Controls from './Controls';
-import '../../styles/Display.css';
+import { useState, useEffect } from "react";
+import Header from "./Header";
+import GridContainer from "./GridContainer";
+import Controls from "./Controls";
+import "../../styles/Display.css";
 
 const Display = (props) => {
   return (
     <div id="display-container">
       <Header />
       <Controls />
-      <GridContainer handleHit={props.handleHit} playerGrid={props.playerGrid} computerGrid={props.computerGrid}/>
+      <GridContainer
+        handleHit={props.handleHit}
+        playerGrid={props.playerGrid}
+        computerGrid={props.computerGrid}
+        playerTurn={props.playerTurn}
+      />
     </div>
   );
 };

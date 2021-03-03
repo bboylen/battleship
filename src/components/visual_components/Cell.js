@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import "../../styles/Cell.css";
 
-const Cell = ({ props, handleHit }) => {
+const Cell = ({ props, handleHit, playerTurn }) => {
   const { id, containsShip, hit, miss } = props;
+  console.log(playerTurn)
   return (
     <div
       className="cell"
@@ -10,7 +11,7 @@ const Cell = ({ props, handleHit }) => {
       className={`${containsShip ? "ship" : ""} ${hit ? "hit" : ""} ${
         miss ? "miss" : ""
       }`}
-      onClick={(!hit) ? ((e) => handleHit(e)) : (null) }
+      onClick={(playerTurn && (!hit && !miss)) ? ((e) => handleHit(e)) : (null) }
     ></div>
   );
 };

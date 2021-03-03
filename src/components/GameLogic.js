@@ -42,24 +42,29 @@ const GameLogic = () => {
   );
   const [computerGrid, setComputerGrid] = useState(gridHelper.buildGrid());
 
+  const switchTurns = () => {
+    setPlayerTurn(!playerTurn);
+  }
+
   const handleHit = (event) => {
     const coordinates = event.target.id;
     const gameboard = playerTurn ? playerGameboard : computerGameboard;
-    console.log('hel')
    // gameboard.receiveAttack(coordinates);
     // might need to refactor code to not mutate gameboard state here
     if (gameboard.gridPlacements[coordinates]) {
+      console.log('a')
       playerTurn
         ? updatePlayerGrid(coordinates, "hit")
         : updateComputerGrid(coordinates, "hit");
     } else {
+      console.log('b')
       playerTurn
         ? updatePlayerGrid(coordinates, "miss")
         : updateComputerGrid(coordinates, "miss");
     }
-    // div must lose hit event, add hit class
-    // switch turns
-    //holy shit make this function do less
+
+    switchTurns();
+    //make this function do less
   };
   // temporary
   const updatePlayerGrid = (coordinates, hitStatus) => {
@@ -69,7 +74,7 @@ const GameLogic = () => {
   };
 
   const updateComputerGrid = (coordinates, hitStatus) => {
-    const newGrid = [...playerGrid];
+    const newGrid = [...computerGrid];
     newGrid[coordinates][hitStatus] = true;
     setComputerGrid(newGrid);
   };
@@ -80,6 +85,7 @@ const GameLogic = () => {
       playerGrid={playerGrid}
       computerGrid={computerGrid}
       handleHit={handleHit}
+      playerTurn={playerTurn}
     />
   );
 };
