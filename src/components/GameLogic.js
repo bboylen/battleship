@@ -45,7 +45,7 @@ const GameLogic = () => {
   const handleHit = (event) => {
     const coordinates = event.target.id;
     const gameboard = playerTurn ? playerGameboard : computerGameboard;
-    
+    console.log('hel')
    // gameboard.receiveAttack(coordinates);
     // might need to refactor code to not mutate gameboard state here
     if (gameboard.gridPlacements[coordinates]) {
