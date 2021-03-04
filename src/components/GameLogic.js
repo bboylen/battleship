@@ -46,10 +46,22 @@ const GameLogic = () => {
     setPlayerTurn(!playerTurn);
   }
 
+  const updateGameboard = (coordinates) => {
+    //still mutating
+    let holder = {...playerGameboard};
+    console.log(holder);
+    holder.receiveAttack(coordinates);
+    console.log(holder);
+    console.log(playerGameboard)
+
+  }
+
   const handleHit = (event) => {
     const coordinates = event.target.id;
     const gameboard = playerTurn ? playerGameboard : computerGameboard;
-   // gameboard.receiveAttack(coordinates);
+    updateGameboard(coordinates);
+    //gameboard.receiveAttack(coordinates);
+    //console.log(gameboard);
     // might need to refactor code to not mutate gameboard state here
     if (gameboard.gridPlacements[coordinates]) {
       playerTurn
@@ -77,7 +89,6 @@ const GameLogic = () => {
     setComputerGrid(newGrid);
   };
 
-  // click on cell -> receiveAttack(5) -> shotsLanded,ship.hit, shotsMissed -> useEffect / some hook sees change in state and updates grid
   return (
     <Display
       playerGrid={playerGrid}

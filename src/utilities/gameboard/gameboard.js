@@ -20,7 +20,7 @@ const Gameboard = () => {
   const receiveAttack = (coordinates) => {
     if (coordinates in gridPlacements) {
       const ship = gridPlacements[coordinates]
-      const shipIndex = shipIndexes.get(ship).findIndex((position) => position === coordinates);
+      const shipIndex = shipIndexes.get(ship).findIndex((position) => position == coordinates);
       shotsLanded[coordinates] = true;
       return ship.hit(shipIndex);
     } else shotsMissed[coordinates] = true;
