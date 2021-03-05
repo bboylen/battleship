@@ -5,6 +5,7 @@ import Player from "../utilities/player/player";
 import Ship from "../utilities/ship/ship";
 import gridHelper from "../utilities/gridHelper";
 import { useState, useEffect } from "react";
+const clonedeep = require('../../node_modules/lodash.clonedeep')
 
 const GameLogic = () => {
   // write helper function to set up gameboard
@@ -46,23 +47,33 @@ const GameLogic = () => {
     setPlayerTurn(!playerTurn);
   }
 
-  const updateGameboard = (coordinates) => {
+  const updatePlayerGameboard = (coordinates) => {
     //still mutating
+    // CHECK
     let holder = {...playerGameboard};
-    console.log(holder);
     holder.receiveAttack(coordinates);
-    console.log(holder);
-    console.log(playerGameboard)
+    setPlayerGameboard(holder)
+  }
 
+  const updateComputerGameboard = (coordinates) => {
+    //still mutating
+    // CHECK
+    let holder = {...computerGameboard};
+    holder.receiveAttack(coordinates);
+    setComputerGameboard(holder)
   }
 
   const handleHit = (event) => {
     const coordinates = event.target.id;
-    const gameboard = playerTurn ? playerGameboard : computerGameboard;
-    updateGameboard(coordinates);
-    //gameboard.receiveAttack(coordinates);
-    //console.log(gameboard);
-    // might need to refactor code to not mutate gameboard state here
+
+    if (playerTurn) {
+      var gameboard = playerGameboard;
+      updateComputerGameboard(coordinates);
+    } else {
+      var gameboard = computerGameboard;
+      updatePlayerGameboard(coordinates);
+    }
+   
     if (gameboard.gridPlacements[coordinates]) {
       playerTurn
         ? updateComputerGrid(coordinates, "hit")
@@ -76,15 +87,29 @@ const GameLogic = () => {
     switchTurns();
     //make this function do less
   };
-  // temporary
+  
+  const gameOver = (winner) => {
+
+  };
+  
+  useEffect(() => {
+    if (playerGameboard.allShipsSunk()) gameOver(player);
+  }, [playerGameboard] );
+
+  useEffect(() => {
+    if (computerGameboard.allShipsSunk()) gameOver(computer);
+  }, [computerGameboard] );
+
   const updatePlayerGrid = (coordinates, hitStatus) => {
-    const newGrid = [...playerGrid];
+    // this might mutates state 
+    // const newGrid = [...playerGrid];
+    const newGrid = clonedeep(playerGrid);
     newGrid[coordinates][hitStatus] = true;
     setPlayerGrid(newGrid);
   };
 
   const updateComputerGrid = (coordinates, hitStatus) => {
-    const newGrid = [...computerGrid];
+    const newGrid = clonedeep(computerGrid);
     newGrid[coordinates][hitStatus] = true;
     setComputerGrid(newGrid);
   };

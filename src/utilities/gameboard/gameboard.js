@@ -28,6 +28,7 @@ const Gameboard = () => {
 
   const allShipsSunk = () => {
     let oneNotSunk = false;
+    
     shipIndexes.forEach((val,ship) => {
       if (ship.isSunk() === false) oneNotSunk = true;
     })
