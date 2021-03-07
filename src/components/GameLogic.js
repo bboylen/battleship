@@ -35,6 +35,7 @@ const GameLogic = () => {
     populateGameboard(Gameboard())
   );
   const [playerTurn, setPlayerTurn] = useState(true);
+  const [gameBegun, setGameBegun] = useState(false);
   // what else needs to be tracked? Whose turn it is, grid visual
   // track ship state?
 
@@ -120,6 +121,7 @@ const GameLogic = () => {
       computerGrid={computerGrid}
       handleHit={handleHit}
       playerTurn={playerTurn}
+      gameBegun={gameBegun}
     />
   );
 };

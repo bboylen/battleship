@@ -12,11 +12,12 @@ const GridContainer = (props) => {
         handleHit={props.handleHit}
         playerTurn={computerTurn}
       />
-      <Grid
+      {props.gameBegun ? (<Grid
         grid={props.computerGrid}
         handleHit={props.handleHit}
         playerTurn={playerTurn}
-      />
+      />) : (null)}
+
     </div>
   );
 };

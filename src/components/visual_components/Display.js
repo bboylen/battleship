@@ -14,6 +14,7 @@ const Display = (props) => {
         playerGrid={props.playerGrid}
         computerGrid={props.computerGrid}
         playerTurn={props.playerTurn}
+        gameBegun={props.gameBegun}
       />
     </div>
   );
