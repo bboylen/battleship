@@ -5,12 +5,10 @@ import Player from "../utilities/player/player";
 import Ship from "../utilities/ship/ship";
 import gridHelper from "../utilities/gridHelper";
 import { useState, useEffect } from "react";
-const clonedeep = require('../../node_modules/lodash.clonedeep')
+const clonedeep = require("../../node_modules/lodash.clonedeep");
 
 const GameLogic = () => {
-  // write helper function to set up gameboard
-  // later on is populated by player though
-
+  // need method to dynamically generate AI board?
   const populateGameboard = (gameboard) => {
     const ship1 = Ship(5);
     const ship2 = Ship(4);
@@ -36,33 +34,50 @@ const GameLogic = () => {
   );
   const [playerTurn, setPlayerTurn] = useState(true);
   const [gameBegun, setGameBegun] = useState(false);
-  // what else needs to be tracked? Whose turn it is, grid visual
-  // track ship state?
+  // what else needs to be tracked? grid visual / ship state
 
   const [playerGrid, setPlayerGrid] = useState(
     gridHelper.buildGrid(playerGameboard.gridPlacements)
   );
   const [computerGrid, setComputerGrid] = useState(gridHelper.buildGrid());
 
+  // Can I do this with one data structure
+  const [playerShips, setPlayerShips] = useState({
+    carrier: "horizontal",
+    battleship: "horizontal",
+    destroyer: "horizontal",
+    submarine: "horizontal",
+    "patrol boat": "horizontal",
+  });
+
+  const rotateShips = (e) => {
+    const rotatedShips = { ...playerShips };
+    for (let ship in rotatedShips) {
+      rotatedShips[ship] =
+        rotatedShips[ship] === "horizontal" ? "vertical" : "horizontal";
+    }
+    setPlayerShips(rotatedShips);
+  };
+
   const switchTurns = () => {
     setPlayerTurn(!playerTurn);
-  }
+  };
 
   const updatePlayerGameboard = (coordinates) => {
     //still mutating
     // CHECK
-    let holder = {...playerGameboard};
+    let holder = { ...playerGameboard };
     holder.receiveAttack(coordinates);
-    setPlayerGameboard(holder)
-  }
+    setPlayerGameboard(holder);
+  };
 
   const updateComputerGameboard = (coordinates) => {
     //still mutating
     // CHECK
-    let holder = {...computerGameboard};
+    let holder = { ...computerGameboard };
     holder.receiveAttack(coordinates);
-    setComputerGameboard(holder)
-  }
+    setComputerGameboard(holder);
+  };
 
   const handleHit = (event) => {
     const coordinates = event.target.id;
@@ -74,7 +89,7 @@ const GameLogic = () => {
       var gameboard = computerGameboard;
       updatePlayerGameboard(coordinates);
     }
-   
+
     if (gameboard.gridPlacements[coordinates]) {
       playerTurn
         ? updateComputerGrid(coordinates, "hit")
@@ -88,21 +103,19 @@ const GameLogic = () => {
     switchTurns();
     //make this function do less
   };
-  
-  const gameOver = (winner) => {
 
-  };
-  
+  const gameOver = (winner) => {};
+
   useEffect(() => {
     if (playerGameboard.allShipsSunk()) gameOver(player);
-  }, [playerGameboard] );
+  }, [playerGameboard]);
 
   useEffect(() => {
     if (computerGameboard.allShipsSunk()) gameOver(computer);
-  }, [computerGameboard] );
+  }, [computerGameboard]);
 
   const updatePlayerGrid = (coordinates, hitStatus) => {
-    // this might mutates state 
+    // this might mutates state
     // const newGrid = [...playerGrid];
     const newGrid = clonedeep(playerGrid);
     newGrid[coordinates][hitStatus] = true;
@@ -122,6 +135,8 @@ const GameLogic = () => {
       handleHit={handleHit}
       playerTurn={playerTurn}
       gameBegun={gameBegun}
+      playerShips={playerShips}
+      rotateShips={rotateShips}
     />
   );
 };

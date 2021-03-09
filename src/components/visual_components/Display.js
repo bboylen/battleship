@@ -8,7 +8,10 @@ const Display = (props) => {
   return (
     <div id="display-container">
       <Header />
-      <Controls />
+      <Controls
+        playerShips={props.playerShips}
+        rotateShips={props.rotateShips}
+      />
       <GridContainer
         handleHit={props.handleHit}
         playerGrid={props.playerGrid}
