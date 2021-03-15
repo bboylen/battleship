@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../../styles/Ship.css";
+import "../../styles/Ship.scss";
 
 const Ship = (props) => {
   return <div className={`ship ${props.shipName} ${props.orientation}`} />;
