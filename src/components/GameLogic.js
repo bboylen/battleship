@@ -33,7 +33,7 @@ const GameLogic = () => {
     populateGameboard(Gameboard())
   );
   const [playerTurn, setPlayerTurn] = useState(true);
-  const [gameBegun, setGameBegun] = useState(false);
+  const [gameBegun, setGameBegun] = useState(true);
   // what else needs to be tracked? grid visual / ship state
 
   const [playerGrid, setPlayerGrid] = useState(
@@ -47,7 +47,7 @@ const GameLogic = () => {
     battleship: "horizontal",
     destroyer: "horizontal",
     submarine: "horizontal",
-    "patrol boat": "horizontal",
+    "patrol-boat": "horizontal",
   });
 
   const rotateShips = (e) => {

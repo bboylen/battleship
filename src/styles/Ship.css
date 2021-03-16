@@ -1,0 +1,53 @@
+:root {
+  --cell-size: 3.33vw;
+}
+
+.horizontal, .vertical {
+  background-color: black;
+  margin: 5px 5px 5px 5px;
+}
+
+.carrier.horizontal {
+  height: calc( var(--cell-size));
+  width: calc( var(--cell-size) * 5);
+}
+
+.carrier.vertical {
+  height: calc( var(--cell-size) * 5);
+  width: calc( var(--cell-size));
+}
+
+.battleship.horizontal {
+  height: calc( var(--cell-size));
+  width: calc( var(--cell-size) * 4);
+}
+
+.battleship.vertical {
+  height: calc( var(--cell-size) * 4);
+  width: calc( var(--cell-size));
+}
+.destroyer.horizontal, .submarine.horizontal {
+  height: calc( var(--cell-size));
+  width: calc( var(--cell-size) * 3);
+}
+
+.destroyer.vertical, .submarine.vertical  {
+  height: calc( var(--cell-size) * 3);
+  width: calc( var(--cell-size));
+}
+
+.patrol-boat.horizontal {
+  height: calc( var(--cell-size));
+  width: calc( var(--cell-size) * 2);
+}
+
+.patrol-boat.vertical {
+  height: calc( var(--cell-size) * 2);
+  width: calc( var(--cell-size));
+}
+
+@media only screen and (max-width: 1024px) {
+  :root {
+    --cell-size: 35px;
+  }
+}
