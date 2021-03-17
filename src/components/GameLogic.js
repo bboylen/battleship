@@ -50,6 +50,14 @@ const GameLogic = () => {
     "patrol-boat": "horizontal",
   });
 
+  const [selectedShip, setSelectedShip] = useState(playerShips.carrier);
+
+  const handleShipSelection = (e) => {
+    console.log(e.target.id);
+    setSelectedShip(e.target);
+  }
+
+  // rotate one at a time
   const rotateShips = (e) => {
     const rotatedShips = { ...playerShips };
     for (let ship in rotatedShips) {
@@ -137,6 +145,8 @@ const GameLogic = () => {
       gameBegun={gameBegun}
       playerShips={playerShips}
       rotateShips={rotateShips}
+      selectedShip={selectedShip}
+      handleShipSelection={handleShipSelection}
     />
   );
 };

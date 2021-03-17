@@ -11,6 +11,8 @@ const Display = (props) => {
       <Controls
         playerShips={props.playerShips}
         rotateShips={props.rotateShips}
+        selectedShip={props.selectedShip}
+        handleShipSelection={props.handleShipSelection}
       />
       <GridContainer
         handleHit={props.handleHit}
@@ -18,6 +20,7 @@ const Display = (props) => {
         computerGrid={props.computerGrid}
         playerTurn={props.playerTurn}
         gameBegun={props.gameBegun}
+        selectedShip={props.selectedShip}
       />
     </div>
   );

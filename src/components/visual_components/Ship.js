@@ -5,7 +5,9 @@ const Ship = (props) => {
 
   return (
     <div
-      className={`ship ${props.shipName} ${props.orientation}`}
+      className={`ship ${props.orientation}`}
+      id={props.shipName}
+      onClick={props.handleShipSelection}
     />
   );
 };

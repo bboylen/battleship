@@ -7,41 +7,41 @@
   margin: 5px 5px 5px 5px;
 }
 
-.carrier.horizontal {
+#carrier.horizontal {
   height: calc( var(--cell-size));
   width: calc( var(--cell-size) * 5);
 }
 
-.carrier.vertical {
+#carrier.vertical {
   height: calc( var(--cell-size) * 5);
   width: calc( var(--cell-size));
 }
 
-.battleship.horizontal {
+#battleship.horizontal {
   height: calc( var(--cell-size));
   width: calc( var(--cell-size) * 4);
 }
 
-.battleship.vertical {
+#battleship.vertical {
   height: calc( var(--cell-size) * 4);
   width: calc( var(--cell-size));
 }
-.destroyer.horizontal, .submarine.horizontal {
+#destroyer.horizontal, #submarine.horizontal {
   height: calc( var(--cell-size));
   width: calc( var(--cell-size) * 3);
 }
 
-.destroyer.vertical, .submarine.vertical  {
+#destroyer.vertical, #submarine.vertical  {
   height: calc( var(--cell-size) * 3);
   width: calc( var(--cell-size));
 }
 
-.patrol-boat.horizontal {
+#patrol-boat.horizontal {
   height: calc( var(--cell-size));
   width: calc( var(--cell-size) * 2);
 }
 
-.patrol-boat.vertical {
+#patrol-boat.vertical {
   height: calc( var(--cell-size) * 2);
   width: calc( var(--cell-size));
 }
