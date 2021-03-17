@@ -12,8 +12,12 @@ const gridHelper = {
     }
     return cellArray;
   },
-  returnPlacement: (cellId, shipLength) => {
-    
+  returnPlacement: (cellId, shipLength, shipRotation) => {
+    if (shipRotation === "horizontal") {
+
+    } else {
+      
+    }
   }
 }
 export default gridHelper;

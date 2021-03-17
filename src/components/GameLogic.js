@@ -50,17 +50,28 @@ const GameLogic = () => {
     "patrol-boat": "horizontal",
   });
 
+  const shipLength = {
+    carrier: 5,
+    battleship: 4,
+    destroyer: 3,
+    submarine: 3,
+    "patrol-boat": 2,
+  };
+
   const [selectedShip, setSelectedShip] = useState(null);
 
   const handleShipSelection = (e) => {
     setSelectedShip(e.target.id);
-  }
+  };
 
   const handleShipPlacement = (e) => {
-    console.log(e.target)
-   // const hoverArray = returnPlacement(e.target.id, )
-  }
- 
+    const hoverArray = gridHelper.returnPlacement(
+      e.target.id,
+      shipLength[selectedShip],
+      playerShips[selectedShip]
+    );
+  };
+
   const rotateShips = (e) => {
     const rotatedShips = { ...playerShips };
     for (let ship in rotatedShips) {
