@@ -10,6 +10,10 @@
   background-color:lightgray;
 }
 
+#grid div.hovered {
+  background-color:lightgray;
+}
+
 #grid div.ship {
   background-color: chartreuse;
 }

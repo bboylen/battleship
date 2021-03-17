@@ -21,6 +21,7 @@ const Display = (props) => {
         playerTurn={props.playerTurn}
         gameBegun={props.gameBegun}
         selectedShip={props.selectedShip}
+        handleShipPlacement={props.handleShipPlacement}
       />
     </div>
   );

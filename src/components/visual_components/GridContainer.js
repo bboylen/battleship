@@ -11,6 +11,8 @@ const GridContainer = (props) => {
         grid={props.playerGrid}
         handleHit={props.handleHit}
         playerTurn={computerTurn}
+        selectedShip={props.selectedShip}
+        handleShipPlacement={props.handleShipPlacement}
       />
       {props.gameBegun ? (<Grid
         grid={props.computerGrid}

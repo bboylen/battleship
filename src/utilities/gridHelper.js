@@ -11,6 +11,9 @@ const gridHelper = {
       cellArray.push(cell);
     }
     return cellArray;
+  },
+  returnPlacement: (cellId, shipLength) => {
+    
   }
 }
 export default gridHelper;

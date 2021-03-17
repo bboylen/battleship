@@ -33,7 +33,7 @@ const GameLogic = () => {
     populateGameboard(Gameboard())
   );
   const [playerTurn, setPlayerTurn] = useState(true);
-  const [gameBegun, setGameBegun] = useState(true);
+  const [gameBegun, setGameBegun] = useState(false);
   // what else needs to be tracked? grid visual / ship state
 
   const [playerGrid, setPlayerGrid] = useState(
@@ -50,14 +50,17 @@ const GameLogic = () => {
     "patrol-boat": "horizontal",
   });
 
-  const [selectedShip, setSelectedShip] = useState(playerShips.carrier);
+  const [selectedShip, setSelectedShip] = useState(null);
 
   const handleShipSelection = (e) => {
-    console.log(e.target.id);
-    setSelectedShip(e.target);
+    setSelectedShip(e.target.id);
   }
 
-  // rotate one at a time
+  const handleShipPlacement = (e) => {
+    console.log(e.target)
+   // const hoverArray = returnPlacement(e.target.id, )
+  }
+ 
   const rotateShips = (e) => {
     const rotatedShips = { ...playerShips };
     for (let ship in rotatedShips) {
@@ -147,6 +150,7 @@ const GameLogic = () => {
       rotateShips={rotateShips}
       selectedShip={selectedShip}
       handleShipSelection={handleShipSelection}
+      handleShipPlacement={handleShipPlacement}
     />
   );
 };

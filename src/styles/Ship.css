@@ -7,6 +7,10 @@
   margin: 5px 5px 5px 5px;
 }
 
+.ship.selected {
+  border: 2px solid red;
+}
+
 #carrier.horizontal {
   height: calc( var(--cell-size));
   width: calc( var(--cell-size) * 5);

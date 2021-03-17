@@ -13,6 +13,7 @@ const Controls = (props) => {
           <Ship
             shipName={shipName}
             orientation={props.playerShips[shipName]}
+            selectedShip={props.selectedShip}
             handleShipSelection={props.handleShipSelection}
           />
         ))}
