@@ -22,6 +22,7 @@ const Display = (props) => {
         gameBegun={props.gameBegun}
         selectedShip={props.selectedShip}
         handleShipPlacement={props.handleShipPlacement}
+        cellsSelected={props.cellsSelected}
       />
     </div>
   );

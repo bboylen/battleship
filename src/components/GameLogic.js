@@ -64,13 +64,16 @@ const GameLogic = () => {
     setSelectedShip(e.target.id);
   };
 
+  const [ cellsSelected, setCellsSelected] = useState([]);
+
   const handleShipPlacement = (e) => {
     const hoverArray = gridHelper.returnPlacement(
       e.target.id,
       shipLength[selectedShip],
       playerShips[selectedShip]
     );
-    console.log(hoverArray);
+    setCellsSelected(((hoverArray) ? hoverArray : [e.target.id]))
+    // need to add cancel cursor class if not allowed
   };
 
   const rotateShips = (e) => {
@@ -163,6 +166,7 @@ const GameLogic = () => {
       selectedShip={selectedShip}
       handleShipSelection={handleShipSelection}
       handleShipPlacement={handleShipPlacement}
+      cellsSelected={cellsSelected}
     />
   );
 };

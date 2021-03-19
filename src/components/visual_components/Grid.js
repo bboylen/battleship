@@ -12,6 +12,7 @@ const Grid = (props) => {
             handleHit={props.handleHit}
             playerTurn={props.playerTurn}
             handleShipPlacement={props.handleShipPlacement}
+            cellsSelected={props.cellsSelected}
           />
         );
       })}

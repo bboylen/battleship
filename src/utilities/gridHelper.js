@@ -57,6 +57,48 @@ const gridHelper = {
           console.log("Error! Nonstandard ship size input");
       }
     } else {
+      switch (shipLength) {
+        case 5:
+          if (cellIdStr.match(/^[0-9]$/) || cellIdStr.match(/[1-5].$/)) {
+            console.log('good')
+            for (let i = 1; i < shipLength; i++) {
+              cellPlacements.push(cellIdNum + (i*10));
+            }
+          } else {
+            console.log('badd')
+            validPlacement = false;
+          }
+          break;
+        case 4:
+          if (cellIdStr.match(/^[0-9]$/) || cellIdStr.match(/[0-6].$/)) {
+            for (let i = 1; i < shipLength; i++) {
+              cellPlacements.push(cellIdNum + (i*10));
+            }
+          } else {
+            validPlacement = false;
+          }
+          break;
+        case 3:
+          if ( cellIdStr.match(/^[0-9]$/) || cellIdStr.match(/[0-7].$/)) {
+            for (let i = 1; i < shipLength; i++) {
+              cellPlacements.push(cellIdNum + (i*10));
+            }
+          } else {
+            validPlacement = false;
+          }
+          break;
+        case 2:
+          if ( cellIdStr.match(/^[0-9]$/) || cellIdStr.match(/[0-8].$/)) {
+            for (let i = 1; i < shipLength; i++) {
+              cellPlacements.push(cellIdNum + (i*10));
+            }
+          } else {
+            validPlacement = false;
+          }
+          break;
+        default:
+          console.log("Error! Nonstandard ship size input");
+      }
     }
     return validPlacement ? cellPlacements : false;
   },
