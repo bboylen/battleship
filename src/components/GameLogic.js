@@ -70,6 +70,7 @@ const GameLogic = () => {
       shipLength[selectedShip],
       playerShips[selectedShip]
     );
+    console.log(hoverArray);
   };
 
   const rotateShips = (e) => {
