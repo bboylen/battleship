@@ -60,12 +60,10 @@ const gridHelper = {
       switch (shipLength) {
         case 5:
           if (cellIdStr.match(/^[0-9]$/) || cellIdStr.match(/[1-5].$/)) {
-            console.log('good')
             for (let i = 1; i < shipLength; i++) {
               cellPlacements.push(cellIdNum + (i*10));
             }
           } else {
-            console.log('badd')
             validPlacement = false;
           }
           break;

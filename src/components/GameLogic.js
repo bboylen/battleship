@@ -26,9 +26,7 @@ const GameLogic = () => {
 
   const [player, setPlayer] = useState(Player());
   const [computer, setComputer] = useState(Player());
-  const [playerGameboard, setPlayerGameboard] = useState(
-    populateGameboard(Gameboard())
-  );
+  const [playerGameboard, setPlayerGameboard] = useState(Gameboard());
   const [computerGameboard, setComputerGameboard] = useState(
     populateGameboard(Gameboard())
   );
@@ -64,7 +62,9 @@ const GameLogic = () => {
     setSelectedShip(e.target.id);
   };
 
-  const [ cellsSelected, setCellsSelected] = useState([]);
+  const [cellsSelected, setCellsSelected] = useState([]);
+
+  // create on mouse exit function??
 
   const handleShipPlacement = (e) => {
     const hoverArray = gridHelper.returnPlacement(
@@ -72,9 +72,12 @@ const GameLogic = () => {
       shipLength[selectedShip],
       playerShips[selectedShip]
     );
-    setCellsSelected(((hoverArray) ? hoverArray : [e.target.id]))
-    // need to add cancel cursor class if not allowed
+    setCellsSelected(hoverArray ? hoverArray : [parseInt(e.target.id)]);
   };
+
+  const removeCellSelection = (e) => {
+    setCellsSelected([]);
+  }
 
   const rotateShips = (e) => {
     const rotatedShips = { ...playerShips };
@@ -167,6 +170,7 @@ const GameLogic = () => {
       handleShipSelection={handleShipSelection}
       handleShipPlacement={handleShipPlacement}
       cellsSelected={cellsSelected}
+      removeCellSelection={removeCellSelection}
     />
   );
 };

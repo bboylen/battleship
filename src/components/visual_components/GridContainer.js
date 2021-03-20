@@ -14,6 +14,7 @@ const GridContainer = (props) => {
         selectedShip={props.selectedShip}
         handleShipPlacement={props.handleShipPlacement}
         cellsSelected={props.cellsSelected}
+        removeCellSelection={props.removeCellSelection}
       />
       {props.gameBegun ? (<Grid
         grid={props.computerGrid}

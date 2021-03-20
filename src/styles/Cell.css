@@ -14,6 +14,11 @@
   background-color:lightgray;
 }
 
+#grid div.not-allowed {
+  background-color:lightgray;
+  cursor: not-allowed;
+}
+
 #grid div.ship {
   background-color: chartreuse;
 }

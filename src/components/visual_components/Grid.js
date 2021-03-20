@@ -13,6 +13,7 @@ const Grid = (props) => {
             playerTurn={props.playerTurn}
             handleShipPlacement={props.handleShipPlacement}
             cellsSelected={props.cellsSelected}
+            removeCellSelection={props.removeCellSelection}
           />
         );
       })}
