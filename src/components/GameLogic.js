@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useDebugValue } from "react";
 import Gameboard from "../utilities/gameboard/gameboard";
 import Display from "./visual_components/Display";
 import Player from "../utilities/player/player";
@@ -66,18 +66,32 @@ const GameLogic = () => {
 
   // create on mouse exit function??
 
-  const handleShipPlacement = (e) => {
+  const handleCellSelection = (e) => {
     const hoverArray = gridHelper.returnPlacement(
       e.target.id,
       shipLength[selectedShip],
-      playerShips[selectedShip]
+      playerShips[selectedShip],
+      playerGrid
     );
+    // why not just return hover array? check later
     setCellsSelected(hoverArray ? hoverArray : [parseInt(e.target.id)]);
   };
 
   const removeCellSelection = (e) => {
     setCellsSelected([]);
   }
+
+  const handleShipPlacement = (e) => {
+    const newShip = Ship(cellsSelected.length);
+    let updatedGameboard = { ...playerGameboard };
+    updatedGameboard.placeShip(newShip, cellsSelected);
+    console.log(updatedGameboard)
+    setPlayerGameboard(updatedGameboard);
+  }
+
+  useEffect(() => {
+    setPlayerGrid(gridHelper.buildGrid(playerGameboard.gridPlacements));
+  }, [playerGameboard]);
 
   const rotateShips = (e) => {
     const rotatedShips = { ...playerShips };
@@ -168,9 +182,10 @@ const GameLogic = () => {
       rotateShips={rotateShips}
       selectedShip={selectedShip}
       handleShipSelection={handleShipSelection}
-      handleShipPlacement={handleShipPlacement}
+      handleCellSelection={handleCellSelection}
       cellsSelected={cellsSelected}
       removeCellSelection={removeCellSelection}
+      handleShipPlacement={handleShipPlacement}
     />
   );
 };

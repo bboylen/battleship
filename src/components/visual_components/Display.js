@@ -21,9 +21,10 @@ const Display = (props) => {
         playerTurn={props.playerTurn}
         gameBegun={props.gameBegun}
         selectedShip={props.selectedShip}
-        handleShipPlacement={props.handleShipPlacement}
+        handleCellSelection={props.handleCellSelection}
         cellsSelected={props.cellsSelected}
         removeCellSelection={props.removeCellSelection}
+        handleShipPlacement={props.handleShipPlacement}
       />
     </div>
   );
