@@ -25,6 +25,7 @@ const Display = (props) => {
         cellsSelected={props.cellsSelected}
         removeCellSelection={props.removeCellSelection}
         handleShipPlacement={props.handleShipPlacement}
+        cellClickFunction={props.cellClickFunction}
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../../styles/Cell.css";
 
-const Cell = ({ cellData, handleHit, playerTurn, handleCellSelection, cellsSelected, removeCellSelection, handleShipPlacement }) => {
+const Cell = ({ cellData, handleHit, playerTurn, handleCellSelection, cellsSelected, removeCellSelection, handleShipPlacement, cellClickFunction }) => {
   const { id, containsShip, hit, miss } = cellData;
   return (
     <div
@@ -12,7 +12,7 @@ const Cell = ({ cellData, handleHit, playerTurn, handleCellSelection, cellsSelec
       // onClick={playerTurn && !hit && !miss ? (e) => handleHit(e) : null}
       onMouseOver={handleCellSelection}
       onMouseLeave={removeCellSelection}
-      onClick={handleShipPlacement}
+      onClick={cellClickFunction}
     ></div>
   );
 };

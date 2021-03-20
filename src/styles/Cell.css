@@ -15,8 +15,8 @@
 }
 
 #grid div.not-allowed {
-  background-color:lightgray;
   cursor: not-allowed;
+  background-color: grey;
 }
 
 #grid div.ship {

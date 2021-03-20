@@ -38,6 +38,7 @@ const GameLogic = () => {
     gridHelper.buildGrid(playerGameboard.gridPlacements)
   );
   const [computerGrid, setComputerGrid] = useState(gridHelper.buildGrid());
+  
 
   // Can I do this with one data structure
   const [playerShips, setPlayerShips] = useState({
@@ -64,8 +65,6 @@ const GameLogic = () => {
 
   const [cellsSelected, setCellsSelected] = useState([]);
 
-  // create on mouse exit function??
-
   const handleCellSelection = (e) => {
     const hoverArray = gridHelper.returnPlacement(
       e.target.id,
@@ -85,13 +84,24 @@ const GameLogic = () => {
     const newShip = Ship(cellsSelected.length);
     let updatedGameboard = { ...playerGameboard };
     updatedGameboard.placeShip(newShip, cellsSelected);
-    console.log(updatedGameboard)
+   // console.log(updatedGameboard)
     setPlayerGameboard(updatedGameboard);
   }
 
   useEffect(() => {
     setPlayerGrid(gridHelper.buildGrid(playerGameboard.gridPlacements));
   }, [playerGameboard]);
+
+  const [cellClickFunction, setCellClickFunction] = useState();
+
+  useEffect(() => {
+    console.log(cellsSelected)
+    if (cellsSelected.length === 1) {
+      setCellClickFunction(null);
+    } else {
+      setCellClickFunction(() => handleShipPlacement);
+    }
+  }, [cellsSelected])
 
   const rotateShips = (e) => {
     const rotatedShips = { ...playerShips };
@@ -186,6 +196,7 @@ const GameLogic = () => {
       cellsSelected={cellsSelected}
       removeCellSelection={removeCellSelection}
       handleShipPlacement={handleShipPlacement}
+      cellClickFunction={cellClickFunction}
     />
   );
 };
