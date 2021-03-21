@@ -4,6 +4,7 @@ import Display from "./visual_components/Display";
 import Player from "../utilities/player/player";
 import Ship from "../utilities/ship/ship";
 import gridHelper from "../utilities/gridHelper";
+import calculateComputerMoveCoordinates from "../utilities/shipAI/shipAI";
 import { useState, useEffect } from "react";
 const clonedeep = require("../../node_modules/lodash.clonedeep");
 
@@ -123,17 +124,21 @@ const GameLogic = () => {
     setPlayerTurn(!playerTurn);
   };
 
+  useEffect(() => {
+    if (gameBegun && playerTurn) {
+      setGameMessage("It is the Player's Turn");
+    } else if (gameBegun && !playerTurn) {
+      setGameMessage("It is the Computer's Turn");
+    }
+  }, [playerTurn, gameBegun])
+
   const updatePlayerGameboard = (coordinates) => {
-    //still mutating
-    // CHECK
     let holder = { ...playerGameboard };
     holder.receiveAttack(coordinates);
     setPlayerGameboard(holder);
   };
 
   const updateComputerGameboard = (coordinates) => {
-    //still mutating
-    // CHECK
     let holder = { ...computerGameboard };
     holder.receiveAttack(coordinates);
     setComputerGameboard(holder);
@@ -141,6 +146,10 @@ const GameLogic = () => {
 
   const handleHit = (event) => {
     const coordinates = event.target.id;
+    processHit(coordinates);
+  };
+
+  const processHit = (coordinates) => {
     if (playerTurn) {
       var gameboard = computerGameboard;
       updateComputerGameboard(coordinates);
@@ -160,8 +169,13 @@ const GameLogic = () => {
     }
 
     switchTurns();
-    //make this function do less
-  };
+  }
+
+  useEffect(() => {
+    if (!playerTurn) {
+      setTimeout(() => processHit(calculateComputerMoveCoordinates(playerGameboard)), 750)
+    }
+  }, [playerTurn])
 
   useEffect(() => {
     if (Object.keys(playerShips).length === 0) setGameBegun(true);
