@@ -16,6 +16,7 @@ const Grid = (props) => {
             removeCellSelection={props.removeCellSelection}
             handleShipPlacement={props.handleShipPlacement}
             cellClickFunction={props.cellClickFunction}
+            gameBegun={props.gameBegun}
           />
         );
       })}

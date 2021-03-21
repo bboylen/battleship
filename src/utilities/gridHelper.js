@@ -82,7 +82,7 @@ const gridHelper = {
           }
           break;
         default:
-          console.log("Error! Nonstandard ship size input");
+          break;
       }
     } else {
       switch (shipLength) {
@@ -151,7 +151,7 @@ const gridHelper = {
           }
           break;
         default:
-          console.log("Error! Nonstandard ship size input");
+          break;
       }
     }
     return validPlacement ? cellPlacements : false;

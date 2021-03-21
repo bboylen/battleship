@@ -82,7 +82,6 @@ const GameLogic = () => {
 
   const removeShip = (shipId) => {
     let playerShipList = { ...playerShips };
-    //playerShipList.delete(playerShipList[shipId]);
     delete playerShipList[shipId];
     setPlayerShips(playerShipList);
     setSelectedShip({});
@@ -98,7 +97,7 @@ const GameLogic = () => {
   }
 
   useEffect(() => {
-    setPlayerGrid(gridHelper.buildGrid(playerGameboard.gridPlacements));
+    if (!gameBegun) setPlayerGrid(gridHelper.buildGrid(playerGameboard.gridPlacements));
   }, [playerGameboard]);
 
   const [cellClickFunction, setCellClickFunction] = useState();
@@ -142,12 +141,11 @@ const GameLogic = () => {
 
   const handleHit = (event) => {
     const coordinates = event.target.id;
-
     if (playerTurn) {
-      var gameboard = playerGameboard;
+      var gameboard = computerGameboard;
       updateComputerGameboard(coordinates);
     } else {
-      var gameboard = computerGameboard;
+      var gameboard = playerGameboard;
       updatePlayerGameboard(coordinates);
     }
 
@@ -165,7 +163,11 @@ const GameLogic = () => {
     //make this function do less
   };
 
-  const gameOver = (winner) => {};
+  useEffect(() => {
+    if (Object.keys(playerShips).length === 0) setGameBegun(true);
+  }, [playerShips])
+
+  const gameOver = (winner) => {console.log('gameover')};
 
   useEffect(() => {
     if (playerGameboard.allShipsSunk()) gameOver(player);
@@ -176,10 +178,9 @@ const GameLogic = () => {
   }, [computerGameboard]);
 
   const updatePlayerGrid = (coordinates, hitStatus) => {
-    // this might mutates state
-    // const newGrid = [...playerGrid];
     const newGrid = clonedeep(playerGrid);
     newGrid[coordinates][hitStatus] = true;
+    console.log(newGrid)
     setPlayerGrid(newGrid);
   };
 

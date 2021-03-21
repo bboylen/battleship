@@ -17,11 +17,14 @@ const GridContainer = (props) => {
         removeCellSelection={props.removeCellSelection}
         handleShipPlacement={props.handleShipPlacement}
         cellClickFunction={props.cellClickFunction}
+        gameBegun={props.gameBegun}
       />
       {props.gameBegun ? (<Grid
         grid={props.computerGrid}
         handleHit={props.handleHit}
         playerTurn={playerTurn}
+        cellsSelected={props.cellsSelected}
+        gameBegun={props.gameBegun}
       />) : (null)}
 
     </div>
