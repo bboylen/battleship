@@ -57,7 +57,7 @@ const GameLogic = () => {
     "patrol-boat": 2,
   };
 
-  const [selectedShip, setSelectedShip] = useState(null);
+  const [selectedShip, setSelectedShip] = useState({});
 
   const handleShipSelection = (e) => {
     setSelectedShip(e.target.id);
@@ -76,16 +76,25 @@ const GameLogic = () => {
     setCellsSelected(hoverArray ? hoverArray : [parseInt(e.target.id)]);
   };
 
-  const removeCellSelection = (e) => {
+  const removeCellSelection = () => {
     setCellsSelected([]);
-  }
+  };
+
+  const removeShip = (shipId) => {
+    let playerShipList = { ...playerShips };
+    //playerShipList.delete(playerShipList[shipId]);
+    delete playerShipList[shipId];
+    setPlayerShips(playerShipList);
+    setSelectedShip({});
+  };
 
   const handleShipPlacement = (e) => {
     const newShip = Ship(cellsSelected.length);
     let updatedGameboard = { ...playerGameboard };
     updatedGameboard.placeShip(newShip, cellsSelected);
-   // console.log(updatedGameboard)
+    removeCellSelection();
     setPlayerGameboard(updatedGameboard);
+    removeShip(selectedShip);
   }
 
   useEffect(() => {
@@ -95,7 +104,6 @@ const GameLogic = () => {
   const [cellClickFunction, setCellClickFunction] = useState();
 
   useEffect(() => {
-    console.log(cellsSelected)
     if (cellsSelected.length === 1) {
       setCellClickFunction(null);
     } else {
