@@ -38,7 +38,7 @@ const GameLogic = () => {
     gridHelper.buildGrid(playerGameboard.gridPlacements)
   );
   const [computerGrid, setComputerGrid] = useState(gridHelper.buildGrid());
-  
+  const [gameMessage, setGameMessage] = useState('Please select and place all ships');
 
   // Can I do this with one data structure
   const [playerShips, setPlayerShips] = useState({
@@ -170,17 +170,16 @@ const GameLogic = () => {
   const gameOver = (winner) => {console.log('gameover')};
 
   useEffect(() => {
-    if (playerGameboard.allShipsSunk()) gameOver(player);
+    if (gameBegun && playerGameboard.allShipsSunk()) gameOver(player);
   }, [playerGameboard]);
 
   useEffect(() => {
-    if (computerGameboard.allShipsSunk()) gameOver(computer);
+    if (gameBegun && computerGameboard.allShipsSunk()) gameOver(computer);
   }, [computerGameboard]);
 
   const updatePlayerGrid = (coordinates, hitStatus) => {
     const newGrid = clonedeep(playerGrid);
     newGrid[coordinates][hitStatus] = true;
-    console.log(newGrid)
     setPlayerGrid(newGrid);
   };
 
@@ -206,6 +205,7 @@ const GameLogic = () => {
       removeCellSelection={removeCellSelection}
       handleShipPlacement={handleShipPlacement}
       cellClickFunction={cellClickFunction}
+      gameMessage={gameMessage}
     />
   );
 };

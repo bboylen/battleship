@@ -6,7 +6,7 @@ const Controls = (props) => {
   return (
     <div id="controls">
       <div id="text">
-        <p>Player's turn</p>
+        <p>{props.gameMessage}</p>
       </div>
       <div id="ship-container">
         {Object.keys(props.playerShips).map((shipName) => (
@@ -18,11 +18,12 @@ const Controls = (props) => {
           />
         ))}
       </div>
-      <div id="button-container">
+      {!props.gameBegun ? (<div id="button-container">
         <button id="rotate-ship-btn" onClick={props.rotateShips}>
           Rotate Ships
         </button>
-      </div>
+      </div>) : null }
+      
     </div>
   );
 };

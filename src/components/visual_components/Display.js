@@ -13,6 +13,8 @@ const Display = (props) => {
         rotateShips={props.rotateShips}
         selectedShip={props.selectedShip}
         handleShipSelection={props.handleShipSelection}
+        gameBegun={props.gameBegun}
+        gameMessage={props.gameMessage}
       />
       <GridContainer
         handleHit={props.handleHit}
