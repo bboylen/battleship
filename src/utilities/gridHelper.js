@@ -1,5 +1,4 @@
-const gridHelper = {
-  buildGrid: (gridPlacements = false) => {
+const buildGrid = (gridPlacements = false) => {
     const cellArray = [];
     for (let i = 0; i < 100; i++) {
       let cell = {};
@@ -10,8 +9,9 @@ const gridHelper = {
       cellArray.push(cell);
     }
     return cellArray;
-  },
-  returnPlacement: (cellIdStr, shipLength, shipRotation, playerGrid) => {
+  };
+
+  const returnPlacement = (cellIdStr, shipLength, shipRotation, grid) => {
     const cellIdNum = parseInt(cellIdStr);
     const cellPlacements = [cellIdNum];
     let validPlacement = true;
@@ -20,10 +20,10 @@ const gridHelper = {
         case 5:
           if (
             (cellIdStr.match(/[0-5]$/) || cellIdStr.match(/.[0-5]$/)) &&
-            !playerGrid[cellIdNum].containsShip
+            !grid[cellIdNum].containsShip
           ) {
             for (let i = 1; i < shipLength; i++) {
-              if (playerGrid[cellIdNum + i].containsShip) {
+              if (grid[cellIdNum + i].containsShip) {
                 validPlacement = false;
                 break;
               }
@@ -36,10 +36,10 @@ const gridHelper = {
         case 4:
           if (
             (cellIdStr.match(/[0-6]$/) || cellIdStr.match(/.[0-6]$/)) &&
-            !playerGrid[cellIdNum].containsShip
+            !grid[cellIdNum].containsShip
           ) {
             for (let i = 1; i < shipLength; i++) {
-              if (playerGrid[cellIdNum + i].containsShip) {
+              if (grid[cellIdNum + i].containsShip) {
                 validPlacement = false;
                 break;
               }
@@ -52,10 +52,10 @@ const gridHelper = {
         case 3:
           if (
             (cellIdStr.match(/[0-7]$/) || cellIdStr.match(/.[0-7]$/)) &&
-            !playerGrid[cellIdNum].containsShip
+            !grid[cellIdNum].containsShip
           ) {
             for (let i = 1; i < shipLength; i++) {
-              if (playerGrid[cellIdNum + i].containsShip) {
+              if (grid[cellIdNum + i].containsShip) {
                 validPlacement = false;
                 break;
               }
@@ -68,10 +68,10 @@ const gridHelper = {
         case 2:
           if (
             (cellIdStr.match(/[0-8]$/) || cellIdStr.match(/.[0-8]$/)) &&
-            !playerGrid[cellIdNum].containsShip
+            !grid[cellIdNum].containsShip
           ) {
             for (let i = 1; i < shipLength; i++) {
-              if (playerGrid[cellIdNum + i].containsShip) {
+              if (grid[cellIdNum + i].containsShip) {
                 validPlacement = false;
                 break;
               }
@@ -89,10 +89,10 @@ const gridHelper = {
         case 5:
           if (
             (cellIdStr.match(/^[0-9]$/) || cellIdStr.match(/[1-5].$/)) &&
-            !playerGrid[cellIdNum].containsShip
+            !grid[cellIdNum].containsShip
           ) {
             for (let i = 1; i < shipLength; i++) {
-              if (playerGrid[cellIdNum + i * 10].containsShip) {
+              if (grid[cellIdNum + i * 10].containsShip) {
                 validPlacement = false;
                 break;
               }
@@ -105,10 +105,10 @@ const gridHelper = {
         case 4:
           if (
             (cellIdStr.match(/^[0-9]$/) || cellIdStr.match(/[0-6].$/)) &&
-            !playerGrid[cellIdNum].containsShip
+            !grid[cellIdNum].containsShip
           ) {
             for (let i = 1; i < shipLength; i++) {
-              if (playerGrid[cellIdNum + i * 10].containsShip) {
+              if (grid[cellIdNum + i * 10].containsShip) {
                 validPlacement = false;
                 break;
               }
@@ -121,10 +121,10 @@ const gridHelper = {
         case 3:
           if (
             (cellIdStr.match(/^[0-9]$/) || cellIdStr.match(/[0-7].$/)) &&
-            !playerGrid[cellIdNum].containsShip
+            !grid[cellIdNum].containsShip
           ) {
             for (let i = 1; i < shipLength; i++) {
-              if (playerGrid[cellIdNum + i * 10].containsShip) {
+              if (grid[cellIdNum + i * 10].containsShip) {
                 validPlacement = false;
                 break;
               }
@@ -137,10 +137,10 @@ const gridHelper = {
         case 2:
           if (
             (cellIdStr.match(/^[0-9]$/) || cellIdStr.match(/[0-8].$/)) &&
-            !playerGrid[cellIdNum].containsShip
+            !grid[cellIdNum].containsShip
           ) {
             for (let i = 1; i < shipLength; i++) {
-              if (playerGrid[cellIdNum + i * 10].containsShip) {
+              if (grid[cellIdNum + i * 10].containsShip) {
                 validPlacement = false;
                 break;
               }
@@ -155,6 +155,6 @@ const gridHelper = {
       }
     }
     return validPlacement ? cellPlacements : false;
-  },
-};
-export default gridHelper;
+  }
+
+export {buildGrid, returnPlacement};

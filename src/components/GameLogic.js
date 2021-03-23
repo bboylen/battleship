@@ -3,8 +3,8 @@ import Gameboard from "../utilities/gameboard/gameboard";
 import Display from "./visual_components/Display";
 import Player from "../utilities/player/player";
 import Ship from "../utilities/ship/ship";
-import gridHelper from "../utilities/gridHelper";
-import calculateComputerMoveCoordinates from "../utilities/shipAI/shipAI";
+import {buildGrid, returnPlacement} from "../utilities/gridHelper";
+import {calculateComputerMoveCoordinates, chooseComputerShipPlaces} from "../utilities/shipAI/shipAI";
 import { useState, useEffect } from "react";
 const clonedeep = require("../../node_modules/lodash.clonedeep");
 
@@ -33,12 +33,11 @@ const GameLogic = () => {
   );
   const [playerTurn, setPlayerTurn] = useState(true);
   const [gameBegun, setGameBegun] = useState(false);
-  // what else needs to be tracked? grid visual / ship state
 
   const [playerGrid, setPlayerGrid] = useState(
-    gridHelper.buildGrid(playerGameboard.gridPlacements)
+    buildGrid(playerGameboard.gridPlacements)
   );
-  const [computerGrid, setComputerGrid] = useState(gridHelper.buildGrid());
+  const [computerGrid, setComputerGrid] = useState(buildGrid());
   const [gameMessage, setGameMessage] = useState('Please select and place all ships');
 
   // Can I do this with one data structure
@@ -67,7 +66,7 @@ const GameLogic = () => {
   const [cellsSelected, setCellsSelected] = useState([]);
 
   const handleCellSelection = (e) => {
-    const hoverArray = gridHelper.returnPlacement(
+    const hoverArray = returnPlacement(
       e.target.id,
       shipLength[selectedShip],
       playerShips[selectedShip],
@@ -98,7 +97,7 @@ const GameLogic = () => {
   }
 
   useEffect(() => {
-    if (!gameBegun) setPlayerGrid(gridHelper.buildGrid(playerGameboard.gridPlacements));
+    if (!gameBegun) setPlayerGrid(buildGrid(playerGameboard.gridPlacements));
   }, [playerGameboard]);
 
   const [cellClickFunction, setCellClickFunction] = useState();
@@ -145,6 +144,7 @@ const GameLogic = () => {
   };
 
   const handleHit = (event) => {
+    if (!playerTurn) return;
     const coordinates = event.target.id;
     processHit(coordinates);
   };
