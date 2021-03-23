@@ -10,18 +10,20 @@ const clonedeep = require("../../node_modules/lodash.clonedeep");
 
 const GameLogic = () => {
   // need method to dynamically generate AI board?
-  const populateGameboard = (gameboard) => {
+  const populateComputerGameboard = () => {
+    const shipPlacements = chooseComputerShipPlaces();
     const ship1 = Ship(5);
     const ship2 = Ship(4);
     const ship3 = Ship(3);
     const ship4 = Ship(3);
     const ship5 = Ship(2);
 
-    gameboard.placeShip(ship1, [0, 1, 2, 3, 4]);
-    gameboard.placeShip(ship2, [10, 11, 12, 13]);
-    gameboard.placeShip(ship3, [20, 21, 22]);
-    gameboard.placeShip(ship4, [30, 31, 32]);
-    gameboard.placeShip(ship5, [40, 41]);
+    let gameboard = Gameboard();
+    gameboard.placeShip(ship1, shipPlacements[0]);
+    gameboard.placeShip(ship2, shipPlacements[1]);
+    gameboard.placeShip(ship3, shipPlacements[2]);
+    gameboard.placeShip(ship4, shipPlacements[3]);
+    gameboard.placeShip(ship5, shipPlacements[4]);
     return gameboard;
   };
 
@@ -29,7 +31,7 @@ const GameLogic = () => {
   const [computer, setComputer] = useState(Player());
   const [playerGameboard, setPlayerGameboard] = useState(Gameboard());
   const [computerGameboard, setComputerGameboard] = useState(
-    populateGameboard(Gameboard())
+    populateComputerGameboard()
   );
   const [playerTurn, setPlayerTurn] = useState(true);
   const [gameBegun, setGameBegun] = useState(false);
@@ -181,7 +183,7 @@ const GameLogic = () => {
     if (Object.keys(playerShips).length === 0) setGameBegun(true);
   }, [playerShips])
 
-  const gameOver = (winner) => {console.log('gameover')};
+  const gameOver = (winner) => {alert('gameover')};
 
   useEffect(() => {
     if (gameBegun && playerGameboard.allShipsSunk()) gameOver(player);

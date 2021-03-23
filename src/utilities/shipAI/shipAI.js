@@ -37,7 +37,6 @@ const chooseComputerShipPlaces = () => {
     for (let coordinate of shipCoordinates) {
       tempGridPlacements[coordinate] = true;
     }
-    console.log(tempGridPlacements)
     tempComputerGrid = buildGrid(tempGridPlacements);
     returnShipPlacements.push(shipCoordinates);
   }
