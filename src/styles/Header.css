@@ -1,23 +1,29 @@
+@font-face {
+  font-family: 'header';
+  src: local('header'), url(../fonts/anastasia/Anastasia-Regular.ttf.woff);
+}
+
 #header {
   text-align: center;
 }
 
 #header h1 {
-  font-size: 90px;
+  font-size: 110px;
   margin-top: 0;
   margin-bottom: 20px;
   padding-top: 40px;
-  color: blue;
+  color: #faf6ae;
+  font-family: header;
 }
 
 @media only screen and (max-width: 800px) {
   #header h1 {
-    font-size: 63px;
+    font-size: 80px;
   }
 }
 
 @media only screen and (max-width: 600px) {
   #header h1 {
-    font-size: 45px;
+    font-size: 65px;
   }
 }

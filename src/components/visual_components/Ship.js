@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import "../../styles/Ship.css";
 
 const Ship = (props) => {

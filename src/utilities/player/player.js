@@ -1,3 +1,5 @@
+// Ended up not using this class
+
 const Player = () => {
   let gameboard = {};
 

@@ -1,15 +1,20 @@
-import { React, useDebugValue } from "react";
+import { React } from "react";
 import Gameboard from "../utilities/gameboard/gameboard";
 import Display from "./visual_components/Display";
-import Player from "../utilities/player/player";
 import Ship from "../utilities/ship/ship";
-import {buildGrid, returnPlacement} from "../utilities/gridHelper";
-import {calculateComputerMoveCoordinates, chooseComputerShipPlaces} from "../utilities/shipAI/shipAI";
+import { buildGrid, returnPlacement } from "../utilities/gridHelper";
+import {
+  calculateComputerMoveCoordinates,
+  chooseComputerShipPlaces,
+} from "../utilities/shipAI/shipAI";
 import { useState, useEffect } from "react";
 const clonedeep = require("../../node_modules/lodash.clonedeep");
 
 const GameLogic = () => {
-  // need method to dynamically generate AI board?
+  // Initialize state variables
+
+  const [playerGameboard, setPlayerGameboard] = useState(Gameboard());
+
   const populateComputerGameboard = () => {
     const shipPlacements = chooseComputerShipPlaces();
     const ship1 = Ship(5);
@@ -27,22 +32,15 @@ const GameLogic = () => {
     return gameboard;
   };
 
-  const [player, setPlayer] = useState(Player());
-  const [computer, setComputer] = useState(Player());
-  const [playerGameboard, setPlayerGameboard] = useState(Gameboard());
   const [computerGameboard, setComputerGameboard] = useState(
     populateComputerGameboard()
   );
   const [playerTurn, setPlayerTurn] = useState(true);
   const [gameBegun, setGameBegun] = useState(false);
-
   const [playerGrid, setPlayerGrid] = useState(
     buildGrid(playerGameboard.gridPlacements)
   );
   const [computerGrid, setComputerGrid] = useState(buildGrid());
-  const [gameMessage, setGameMessage] = useState('Please select and place all ships');
-
-  // Can I do this with one data structure
   const [playerShips, setPlayerShips] = useState({
     carrier: "horizontal",
     battleship: "horizontal",
@@ -50,7 +48,6 @@ const GameLogic = () => {
     submarine: "horizontal",
     "patrol-boat": "horizontal",
   });
-
   const shipLength = {
     carrier: 5,
     battleship: 4,
@@ -58,15 +55,19 @@ const GameLogic = () => {
     submarine: 3,
     "patrol-boat": 2,
   };
+  const [gameMessage, setGameMessage] = useState(
+    "Please select and place all ships"
+  );
 
+  // Allow player to select and place ships
   const [selectedShip, setSelectedShip] = useState({});
+  const [cellsSelected, setCellsSelected] = useState([]);
 
   const handleShipSelection = (e) => {
     setSelectedShip(e.target.id);
   };
 
-  const [cellsSelected, setCellsSelected] = useState([]);
-
+  // Determines if hovered cell is a valid place for ship
   const handleCellSelection = (e) => {
     const hoverArray = returnPlacement(
       e.target.id,
@@ -96,12 +97,13 @@ const GameLogic = () => {
     removeCellSelection();
     setPlayerGameboard(updatedGameboard);
     removeShip(selectedShip);
-  }
+  };
 
   useEffect(() => {
     if (!gameBegun) setPlayerGrid(buildGrid(playerGameboard.gridPlacements));
   }, [playerGameboard]);
 
+  // Cell components only have the function to place ships if the placement is valid
   const [cellClickFunction, setCellClickFunction] = useState();
 
   useEffect(() => {
@@ -110,7 +112,12 @@ const GameLogic = () => {
     } else {
       setCellClickFunction(() => handleShipPlacement);
     }
-  }, [cellsSelected])
+  }, [cellsSelected]);
+
+  // Start game once user has placed all ships
+  useEffect(() => {
+    if (Object.keys(playerShips).length === 0) setGameBegun(true);
+  }, [playerShips]);
 
   const rotateShips = (e) => {
     const rotatedShips = { ...playerShips };
@@ -131,7 +138,7 @@ const GameLogic = () => {
     } else if (gameBegun && !playerTurn) {
       setGameMessage("It is the Computer's Turn");
     }
-  }, [playerTurn, gameBegun])
+  }, [playerTurn, gameBegun]);
 
   const updatePlayerGameboard = (coordinates) => {
     let holder = { ...playerGameboard };
@@ -145,6 +152,19 @@ const GameLogic = () => {
     setComputerGameboard(holder);
   };
 
+  const updatePlayerGrid = (coordinates, hitStatus) => {
+    const newGrid = [...playerGrid];
+    newGrid[coordinates][hitStatus] = true;
+    setPlayerGrid(newGrid);
+  };
+
+  const updateComputerGrid = (coordinates, hitStatus) => {
+    const newGrid = [...computerGrid];
+    newGrid[coordinates][hitStatus] = true;
+    setComputerGrid(newGrid);
+  };
+
+  // Prevents user from making move for computer. Should refactor so the player grid does not receive the handleHit function
   const handleHit = (event) => {
     if (!playerTurn) return;
     const coordinates = event.target.id;
@@ -171,39 +191,28 @@ const GameLogic = () => {
     }
 
     switchTurns();
-  }
+  };
 
   useEffect(() => {
     if (!playerTurn) {
-      setTimeout(() => processHit(calculateComputerMoveCoordinates(playerGameboard)), 750)
+      setTimeout(
+        () => processHit(calculateComputerMoveCoordinates(playerGameboard)),
+        750
+      );
     }
-  }, [playerTurn])
+  }, [playerTurn]);
+
+  const gameOver = (winner) => {
+    alert("gameover");
+  };
 
   useEffect(() => {
-    if (Object.keys(playerShips).length === 0) setGameBegun(true);
-  }, [playerShips])
-
-  const gameOver = (winner) => {alert('gameover')};
-
-  useEffect(() => {
-    if (gameBegun && playerGameboard.allShipsSunk()) gameOver(player);
+    if (gameBegun && playerGameboard.allShipsSunk()) gameOver("player");
   }, [playerGameboard]);
 
   useEffect(() => {
-    if (gameBegun && computerGameboard.allShipsSunk()) gameOver(computer);
+    if (gameBegun && computerGameboard.allShipsSunk()) gameOver("computer");
   }, [computerGameboard]);
-
-  const updatePlayerGrid = (coordinates, hitStatus) => {
-    const newGrid = clonedeep(playerGrid);
-    newGrid[coordinates][hitStatus] = true;
-    setPlayerGrid(newGrid);
-  };
-
-  const updateComputerGrid = (coordinates, hitStatus) => {
-    const newGrid = clonedeep(computerGrid);
-    newGrid[coordinates][hitStatus] = true;
-    setComputerGrid(newGrid);
-  };
 
   return (
     <Display

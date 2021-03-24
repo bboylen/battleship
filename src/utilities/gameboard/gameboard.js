@@ -1,5 +1,3 @@
-import Ship from '../ship/ship';
-
 const Gameboard = () => {
   const gridPlacements = {};
   const shipIndexes = new Map();

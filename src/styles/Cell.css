@@ -20,15 +20,15 @@
 }
 
 #grid div.ship {
-  background-color: chartreuse;
+  background-color: #48addb;
 }
 
 #grid div.hit {
-  background-color: red;
+  background-color: #ad1c32;
 }
 
 #grid div.miss {
-  background-color: darkblue;
+  background-color: #076f64;
 }
 /* responsive sizing */
 

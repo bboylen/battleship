@@ -1,6 +1,6 @@
 import "../../styles/Cell.css";
 
-const Cell = ({ cellData, handleHit, playerTurn, handleCellSelection, cellsSelected, removeCellSelection, handleShipPlacement, cellClickFunction, gameBegun }) => {
+const Cell = ({ cellData, handleHit, playerTurn, handleCellSelection, cellsSelected, removeCellSelection, cellClickFunction, gameBegun }) => {
   const { id, containsShip, hit, miss } = cellData;
   return (
     <div
