@@ -19,7 +19,7 @@ const Controls = (props) => {
       </div>
       {!props.gameBegun ? (<div id="button-container">
         <button id="rotate-ship-btn" onClick={props.rotateShips}>
-          Rotate Ships
+          ROTATE SHIPS
         </button>
       </div>) : null }
       
