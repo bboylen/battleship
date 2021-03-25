@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/battleship/static/css/main.ad24bb6d.chunk.css",
+    "main.js": "/battleship/static/js/main.63fa8728.chunk.js",
+    "main.js.map": "/battleship/static/js/main.63fa8728.chunk.js.map",
+    "runtime-main.js": "/battleship/static/js/runtime-main.97f1cf50.js",
+    "runtime-main.js.map": "/battleship/static/js/runtime-main.97f1cf50.js.map",
+    "static/js/2.2d051c71.chunk.js": "/battleship/static/js/2.2d051c71.chunk.js",
+    "static/js/2.2d051c71.chunk.js.map": "/battleship/static/js/2.2d051c71.chunk.js.map",
+    "index.html": "/battleship/index.html",
+    "static/css/main.ad24bb6d.chunk.css.map": "/battleship/static/css/main.ad24bb6d.chunk.css.map",
+    "static/js/2.2d051c71.chunk.js.LICENSE.txt": "/battleship/static/js/2.2d051c71.chunk.js.LICENSE.txt",
+    "static/media/Controls.css": "/battleship/static/media/Anastasia-Regular.ttf.37f384c7.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.97f1cf50.js",
+    "static/js/2.2d051c71.chunk.js",
+    "static/css/main.ad24bb6d.chunk.css",
+    "static/js/main.63fa8728.chunk.js"
+  ]
+}
