@@ -1,6 +1,6 @@
 # Battleship
 
-## Try it [here](https://bboylen.github.io/battleship/)
+### [Click here to play](https://bboylen.github.io/battleship/)
 
 ## Available Scripts
 
