@@ -197,7 +197,7 @@ const GameLogic = () => {
     if (!playerTurn) {
       setTimeout(
         () => processHit(calculateComputerMoveCoordinates(playerGameboard)),
-        0
+        750
       );
     }
   }, [playerTurn]);
