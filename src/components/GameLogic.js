@@ -197,13 +197,23 @@ const GameLogic = () => {
     if (!playerTurn) {
       setTimeout(
         () => processHit(calculateComputerMoveCoordinates(playerGameboard)),
-        750
+        1
       );
     }
   }, [playerTurn]);
+//750
+  // Determine if game over & create game over modal
+  const [modalActive, setModalActive] = useState(false);
+  const [victoryMessage, setVictoryMessage] = useState("");
 
   const gameOver = (winner) => {
-    alert("gameover");
+    if (winner === "player") {
+      setVictoryMessage("Player Wins :)");
+    } else {
+      setVictoryMessage("Computer Wins :(");
+
+    }
+    setModalActive(true);
   };
 
   useEffect(() => {
@@ -213,6 +223,12 @@ const GameLogic = () => {
   useEffect(() => {
     if (gameBegun && computerGameboard.allShipsSunk()) gameOver("computer");
   }, [computerGameboard]);
+
+  // Reset Game
+  const handleRestartGame = (e) => {
+    console.log("ahh sheet")
+    setModalActive(false);
+  }
 
   return (
     <Display
@@ -231,6 +247,9 @@ const GameLogic = () => {
       handleShipPlacement={handleShipPlacement}
       cellClickFunction={cellClickFunction}
       gameMessage={gameMessage}
+      modalActive={modalActive}
+      victoryMessage={victoryMessage}
+      handleRestartGame={handleRestartGame}
     />
   );
 };

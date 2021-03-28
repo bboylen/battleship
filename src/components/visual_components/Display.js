@@ -1,6 +1,7 @@
 import Header from "./Header";
 import GridContainer from "./GridContainer";
 import Controls from "./Controls";
+import GameOverModal from "./GameOverModal";
 import "../../styles/Display.css";
 
 const Display = (props) => {
@@ -28,6 +29,9 @@ const Display = (props) => {
         handleShipPlacement={props.handleShipPlacement}
         cellClickFunction={props.cellClickFunction}
       />
+      {props.modalActive ? (
+        <GameOverModal victoryMessage={props.victoryMessage} handleRestartGame={props.handleRestartGame}/>
+      ) : null}
     </div>
   );
 };
