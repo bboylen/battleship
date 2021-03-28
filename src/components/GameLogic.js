@@ -216,8 +216,9 @@ const GameLogic = () => {
     setModalActive(true);
   };
 
+  // FOR TESTING
   useEffect(() => {
-    if (gameBegun && playerGameboard.allShipsSunk()) gameOver("player");
+    if (true) gameOver("player");
   }, [playerGameboard]);
 
   useEffect(() => {
