@@ -197,11 +197,11 @@ const GameLogic = () => {
     if (!playerTurn) {
       setTimeout(
         () => processHit(calculateComputerMoveCoordinates(playerGameboard)),
-        1
+        0
       );
     }
   }, [playerTurn]);
-//750
+
   // Determine if game over & create game over modal
   const [modalActive, setModalActive] = useState(false);
   const [victoryMessage, setVictoryMessage] = useState("");
@@ -216,18 +216,29 @@ const GameLogic = () => {
     setModalActive(true);
   };
 
-  // FOR TESTING
   useEffect(() => {
-    if (true) gameOver("player");
+    if (gameBegun && computerGameboard.allShipsSunk()) gameOver("player");
   }, [playerGameboard]);
 
   useEffect(() => {
-    if (gameBegun && computerGameboard.allShipsSunk()) gameOver("computer");
+    if (gameBegun && playerGameboard.allShipsSunk()) gameOver("computer");
   }, [computerGameboard]);
 
   // Reset Game
-  const handleRestartGame = (e) => {
-    console.log("ahh sheet")
+  const handleRestartGame = () => {
+    setPlayerGameboard(Gameboard());
+    setComputerGameboard(populateComputerGameboard())
+    setPlayerGrid(buildGrid(playerGameboard.gridPlacements));
+    setComputerGrid(buildGrid());
+    setGameBegun(false);
+    setPlayerShips({
+      carrier: "horizontal",
+      battleship: "horizontal",
+      destroyer: "horizontal",
+      submarine: "horizontal",
+      "patrol-boat": "horizontal",
+    });
+    setPlayerTurn(true);
     setModalActive(false);
   }
 

@@ -38,3 +38,10 @@
     height: 35px;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  #grid div {
+    width: 30px;
+    height: 30px;
+  }
+}
