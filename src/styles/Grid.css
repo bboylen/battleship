@@ -3,6 +3,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin-right: 5%;
   margin-left: 5%;
+  border: 1px solid black;
 }
 
 @media only screen and (max-width: 1200px) {
