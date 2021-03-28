@@ -18,6 +18,8 @@ Building this app showed me that building the user interface for a game is much 
 
 I ended up storing the vast majority of the stateful information in a top level "Game Logic" component. With this architecture I was able to pass down only what was needed to the display components based on the state of the game. If I were to refactor this code, I would be even more precise with the information that I am sending to lower level components; in a couple cases these components are quite messy, containing multiple if statements to determine the correct classes or onclick functions.
 
+This project also served to deepen my understanding of React Component Lifecycles as well as how Hooks work. A lot of stateful information is stored and updated on every turn, so it is essential that everything gets called in the right order. I have a deepened appreciation for the UseEffect hook after seeing how flexible it is in calling the effects I need at the right time, with the right data. 
+
 ## To-Do
 
 - Make Computer AI smarter
