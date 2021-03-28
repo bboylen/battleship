@@ -18,9 +18,6 @@ Building this app showed me that building the user interface for a game is much 
 
 I ended up storing the vast majority of the stateful information in a top level "Game Logic" component. With this architecture I was able to pass down only what was needed to the display components based on the state of the game. If I were to refactor this code, I would be even more precise with the information that I am sending to lower level components; in a couple cases these components are quite messy, containing multiple if statements to determine the correct classes or onclick functions.
 
-React component lifecycle
-
-
 ## To-Do
 
 - Make Computer AI smarter
