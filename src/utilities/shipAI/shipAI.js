@@ -37,7 +37,7 @@ const calculateComputerMoveCoordinates = (playerGameboard) => {
     if (
       !playerGameboard.shotsLanded[coordinates] &&
       !playerGameboard.shotsMissed[coordinates] &&
-      coordinates > 0 && coordinates < 100
+      coordinates >= 0 && coordinates < 100
     )
       coordinatesAcceptable = true;
   }
