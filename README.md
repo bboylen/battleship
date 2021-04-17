@@ -14,8 +14,8 @@ Implementation of [Battleship boardgame](https://en.wikipedia.org/wiki/Battleshi
 
 ## Display Images
 
-![battleship 5](https://user-images.githubusercontent.com/52515015/115127467-508c0400-9f9c-11eb-9782-06e7e0433120.png)
-![battleship 6](https://user-images.githubusercontent.com/52515015/115127469-5255c780-9f9c-11eb-9543-529d82d6494b.png)
+![battleship 5](https://user-images.githubusercontent.com/52515015/115127467-508c0400-9f9c-11eb-9782-06e7e0433120.png) ![battleship 6](https://user-images.githubusercontent.com/52515015/115127469-5255c780-9f9c-11eb-9543-529d82d6494b.png)
+
 
 ## Learning Takeaways
 
