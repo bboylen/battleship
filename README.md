@@ -12,6 +12,10 @@ Implementation of [Battleship boardgame](https://en.wikipedia.org/wiki/Battleshi
 - Allows user to place ships horizontally or vertically
 - Grid changes color to allow player to know if ship placement is valid
 
+## Display Images
+
+![battleship](https://user-images.githubusercontent.com/52515015/115127369-8bda0300-9f9b-11eb-920b-048d977fa3dc.png)
+![battleship 2](https://user-images.githubusercontent.com/52515015/115127383-9c8a7900-9f9b-11eb-960c-4d8019ec5b3f.png)
 ## Learning Takeaways
 
 Building this app showed me that building the user interface for a game is much harder than implementing the game logic itself. It was pretty simple to write the tests and functions for the basic game behavior. However, planning out the structure of the React component hierarchy for the display was much trickier. 
