@@ -8,7 +8,7 @@ Implementation of [Battleship boardgame](https://en.wikipedia.org/wiki/Battleshi
 
 - User can play against an AI opponent
 - Enemy uses strategy of shooting in area around previous hits
-- Uses Responsive Design and works on both desktop and phone
+- Responsive design that works on both desktop and phone
 - Built using Test Driven Development with [Jest](https://jestjs.io/)
 - Allows user to place ships horizontally or vertically
 - Grid changes color to allow player to know if ship placement is valid
