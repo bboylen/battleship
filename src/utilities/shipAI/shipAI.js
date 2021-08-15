@@ -1,7 +1,6 @@
 import { buildGrid, returnPlacement } from "../gridHelper";
 
 const calculateComputerMoveCoordinates = (playerGameboard) => {
-  console.log(playerGameboard);
   let coordinatesAcceptable = false;
   let coordinates = null;
   let partiallySunkShipCoords = [];
@@ -41,7 +40,6 @@ const calculateComputerMoveCoordinates = (playerGameboard) => {
     )
       coordinatesAcceptable = true;
   }
-  console.log(coordinates);
   return coordinates;
 };
 
