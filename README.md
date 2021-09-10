@@ -11,6 +11,7 @@ Implementation of [Battleship boardgame](https://en.wikipedia.org/wiki/Battleshi
 - Responsive design that works on both desktop and phone
 - Built using Test Driven Development with [Jest](https://jestjs.io/)
 - Allows user to place ships horizontally or vertically
+- Use CSS variables to modulize stylesheets
 - Grid changes color to allow player to know if ship placement is valid
 
 ## Display Images
