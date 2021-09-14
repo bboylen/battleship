@@ -16,10 +16,11 @@ const calculateComputerMoveCoordinates = (playerGameboard) => {
   }
   while (!coordinatesAcceptable) {
     if (partiallySunkShipCoords.length > 0) {
-      let hitCoord =
-        parseInt(partiallySunkShipCoords[
+      let hitCoord = parseInt(
+        partiallySunkShipCoords[
           Math.floor(Math.random() * partiallySunkShipCoords.length)
-        ]);
+        ]
+      );
       let coordChooser = Math.floor(Math.random() * (99 + 1));
       if (coordChooser < 25) {
         coordinates = hitCoord + 1;
@@ -36,7 +37,8 @@ const calculateComputerMoveCoordinates = (playerGameboard) => {
     if (
       !playerGameboard.shotsLanded[coordinates] &&
       !playerGameboard.shotsMissed[coordinates] &&
-      coordinates >= 0 && coordinates < 100
+      coordinates >= 0 &&
+      coordinates < 100
     )
       coordinatesAcceptable = true;
   }

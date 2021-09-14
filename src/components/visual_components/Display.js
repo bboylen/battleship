@@ -30,7 +30,10 @@ const Display = (props) => {
         cellClickFunction={props.cellClickFunction}
       />
       {props.modalActive ? (
-        <GameOverModal victoryMessage={props.victoryMessage} handleRestartGame={props.handleRestartGame}/>
+        <GameOverModal
+          victoryMessage={props.victoryMessage}
+          handleRestartGame={props.handleRestartGame}
+        />
       ) : null}
     </div>
   );

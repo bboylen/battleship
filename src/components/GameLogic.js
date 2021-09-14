@@ -210,7 +210,6 @@ const GameLogic = () => {
       setVictoryMessage("Player Wins :)");
     } else {
       setVictoryMessage("Computer Wins :(");
-
     }
     setModalActive(true);
   };
@@ -226,7 +225,7 @@ const GameLogic = () => {
   // Reset Game
   const handleRestartGame = () => {
     setPlayerGameboard(Gameboard());
-    setComputerGameboard(populateComputerGameboard())
+    setComputerGameboard(populateComputerGameboard());
     setPlayerGrid(buildGrid(playerGameboard.gridPlacements));
     setComputerGrid(buildGrid());
     setGameBegun(false);
@@ -239,7 +238,7 @@ const GameLogic = () => {
     });
     setPlayerTurn(true);
     setModalActive(false);
-  }
+  };
 
   return (
     <Display
