@@ -8,7 +8,6 @@ import {
   chooseComputerShipPlaces,
 } from "../utilities/shipAI/shipAI";
 import { useState, useEffect } from "react";
-const clonedeep = require("../../node_modules/lodash.clonedeep");
 
 const GameLogic = () => {
   // Initialize state variables
